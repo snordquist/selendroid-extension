@@ -24,8 +24,12 @@ In my example I created the class `io.selendroid.extension.MyDemoExtension` and 
       SelendroidCapabilities capa = new SelendroidCapabilities("io.selendroid.testapp:1.0");
       capa.setSelendroidExtensions(myExtension.dex)
       WebDriver driver = new SelendroidDriver(capa);
-      assertEquals("I'm an extension!",
-        driver().callExtension("io.selendroid.extension.DemoExtensionHandler"));
+
+      Map<String, String> data = new HashMap<>();
+      data.put("name", "myname");
+      data.put("key", "my-key");
+      data.put("value", "my-value");
+      driver.callExtension(SetSharedPreferencesExtensionHandler.class.getName(), data);
     }
   }
 ```
